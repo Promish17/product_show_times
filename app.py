@@ -22,6 +22,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "secret_key_goes_here"
 
 api = Api(app)
+db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -48,5 +49,4 @@ api.add_resource(Movie, '/movies')
 api.add_resource(MovieList, '/movies')
 api.add_resource(Bookings, '/booking')
 
-db.init_app(app)
 app.run(port=5000, debug=True)
