@@ -11,7 +11,6 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.movies import Movie, MovieList, Bookings
 
-# def create_app():
 app = Flask(__name__)
 
 @app.before_first_request
@@ -49,7 +48,5 @@ api.add_resource(Movie, '/movies')
 api.add_resource(MovieList, '/movies')
 api.add_resource(Bookings, '/booking')
 
-if __name__=="__main__":
-    db.init_app(app)
-    app.run(port=5000, debug=True)
-    # return app
+db.init_app(app)
+app.run(port=5000, debug=True)
