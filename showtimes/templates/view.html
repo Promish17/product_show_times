@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<body>
+		<h1 class="title">
+			Welcome, {{ current_user.username }}!
+		  </h1>
+		<div class="container-fluid" id="wrapper">
+
+			<div class="row t20">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="lean-h text-black">
+								<i class="glyphicon glyphicon-film"></i> See your Bookings here
+							</h3>
+						</div>
+						<h2>
+							If you wish to book a Movie, 
+							<a href="{{ url_for('main.add')}}">Book Movie</a>
+						</h2>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 5%;">S.No.</th>
+										<th style="width: 10%;">Movie Name</th>
+										<th style="width: 16%;">Screen</th>
+										<th style="width: 10%;">Time</th>
+										<th style="width: 12%;">Center</th>
+										<th style="width: 20%;">City</th>
+										<th style="width: 20%;">Booking Time</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for movie in movies %}
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{ movie.movie_name }}</td>
+										<td>{{ movie.theater_choices }}</td>
+										<td>{{ movie.movie_timings }}</td>
+										<td>{{ movie.movie_centers }}</td>
+										<td>{{ movie.city_choices }}</td>
+										<td>{{ movie.booking_time }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+{% endblock %}

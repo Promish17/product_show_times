@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<body>
+
+		<div class="container-fluid" id="wrapper">
+
+			<div class="row t20">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="lean-h text-black">
+								<i class="glyphicon glyphicon-plus-sign"></i> Book Your Favourite Movie
+							</h3>
+							<hr />
+							
+							<form action="{{ url_for('main.add')}}" method="POST" role="form">
+								{% if current_user.is_authenticated %}
+								<h3>Hi, {{ current_user.username }}, Please book movie here.</h3>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label for="theater-name">Movie Name</label>
+											<select id="movie_name" name="movie_name" class="form-group" required>
+											<option selected="true"></option>
+											{% for movie in movie_name %}
+												<option value="{{movie}}">{{ movie }}</option>
+											{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label for="theater-name">Screen</label>
+											<select id="theater_choices" name="theater_choices" class="form-group" required>
+											<option selected="true"></option>
+											{% for key, value in theater_choices.items() %}
+												<option value="{{value}}">{{ value }}</option>
+											{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+						                  <label for="movie-timings">Select Time</label>
+						                  <select id="movie_timings" name="movie_timings" class="form-group" required>
+											<option selected="true"></option>
+											{% for key, value in movie_timings.items() %}
+												<option value="{{value}}">{{ value }}</option>
+											{% endfor %}
+											</select>
+						                </div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+						                  <label for="movie-centers">Select Center</label>
+						                  <select name="movie_centers" class="form-group" required>
+											<option selected="true"></option>
+											{% for key, value in movie_centers.items() %}
+												<option value="{{value}}">{{ value }}</option>
+											{% endfor %}
+											</select>
+						                </div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="form-group">
+						                  <label for="city-choices">City</label>
+						                  <select name="city_choices" class="form-group" required>
+											<option selected="true"></option>
+											{% for key, value in city_choices.items() %}
+												<option value="{{value}}">{{ value }}</option>
+											{% endfor %}
+											</select>
+						                </div>
+									</div>
+
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label style="visibility:hidden">submit</label>
+											<button type="submit" class="btn btn-primary btn-block">
+												<i class="glyphicon glyphicon-upload"></i> 
+												
+												Submit
+											</button>
+										</div>
+									</div>
+								</div>
+							{% else %}
+							<a href="{{ url_for('auth.login') }}">Please Login to book your Favourite Movie...</a>
+							{% endif %}
+							</form>	
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+</html>
+
+{% endblock %}

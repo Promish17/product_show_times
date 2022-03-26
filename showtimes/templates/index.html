@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<body>
+
+		<div class="container-fluid" id="wrapper">
+
+			<div class="panel-body">
+				<h3 class="lean-h text-black">
+					<i class="glyphicon glyphicon-film"></i> See Top 25 IMDB Movies Here 
+				</h3>
+				<h4>
+					{% if not current_user.is_authenticated %}
+					Please <a href="{{ url_for('auth.login') }}">Login</a> or
+					<a href="{{ url_for('auth.signup') }}">Signup</a> To book Movies
+					{% endif %}
+				</h4>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th style="width: 5%;">S.No.</th>
+								<th style="width: 10%;">Movie Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for movie in movies %}
+							<tr>
+								<td>{{ loop.index }}</td>
+								<td>{{ movie.name }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+
+{% endblock %}
